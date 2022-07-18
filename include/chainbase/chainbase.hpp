@@ -15,12 +15,12 @@
 
 #include <boost/chrono.hpp>
 #include <boost/config.hpp>
-#include <boost/filesystem.hpp>
 #include <boost/lexical_cast.hpp>
 #include <boost/throw_exception.hpp>
 
 #include <array>
 #include <atomic>
+#include <filsystem>
 #include <fstream>
 #include <iostream>
 #include <stdexcept>
@@ -48,7 +48,6 @@
 namespace chainbase {
 
    namespace bip = boost::interprocess;
-   namespace bfs = boost::filesystem;
    using std::unique_ptr;
    using std::vector;
 
@@ -259,7 +258,7 @@ namespace chainbase {
 
          using database_index_row_count_multiset = std::multiset<std::pair<unsigned, std::string>>;
 
-         database(const bfs::path& dir, open_flags write = read_only, uint64_t shared_file_size = 0, bool allow_dirty = false,
+         database(const std::filesystem::path& dir, open_flags write = read_only, uint64_t shared_file_size = 0, bool allow_dirty = false,
                   pinnable_mapped_file::map_mode = pinnable_mapped_file::map_mode::mapped);
          ~database();
          database(database&&) = default;
