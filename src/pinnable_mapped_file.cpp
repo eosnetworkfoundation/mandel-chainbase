@@ -133,7 +133,7 @@ pinnable_mapped_file::pinnable_mapped_file(const std::filesystem::path& dir, boo
 
    if(_writable) {
       //remove meta file created in earlier versions
-      boost::system::error_code ec;
+      std::error_code ec;
       std::filesystem::remove(std::filesystem::absolute(dir/"shared_memory.meta"), ec);
 
       _mapped_file_lock = bip::file_lock(_data_file_path.generic_string().c_str());
@@ -152,7 +152,7 @@ pinnable_mapped_file::pinnable_mapped_file(const std::filesystem::path& dir, boo
 #ifdef SIGPIPE
       sig_set.add(SIGPIPE);
 #endif
-      sig_set.async_wait([](const boost::system::error_code&, int) {
+      sig_set.async_wait([](const std::error_code&, int) {
          BOOST_THROW_EXCEPTION(std::system_error(make_error_code(db_error_code::aborted)));
       });
 
