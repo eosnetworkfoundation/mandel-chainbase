@@ -27,8 +27,8 @@ BOOST_DATA_TEST_CASE(grow_shrink, boost::unit_test::data::make(test_modes), map_
       }
 
    } catch(...) {
-      bfs::remove_all(temp);
+      std::filesystem::remove_all(temp);
       throw;
    }
-   bfs::remove_all(temp);
+   std::filesystem::remove_all(temp);
 }
